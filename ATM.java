@@ -32,4 +32,18 @@ public class ATM{
         return amount;
     }
 
+    public double withdrawMoney(String userID, double amount) throws NullPointerException{
+        if(map.get(userID)<amount){
+            throw new NullPointerException("You can't withdraw money you don't have");
+        }
+        map.put(userID,map.get(userID)-amount);
+        return amount;
+    }
+
+    public boolean transferMoney(String fromAccount, String toAccount, double amount){
+        withdrawMoney(fromAccount, amount);
+        depositMoney(toAccount, amount);
+        return true;
+    }
+
 }
