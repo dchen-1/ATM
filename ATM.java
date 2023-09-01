@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLDataException;
 import java.util.HashMap;
 
@@ -44,6 +46,14 @@ public class ATM{
         withdrawMoney(fromAccount, amount);
         depositMoney(toAccount, amount);
         return true;
+    }
+
+    public void audit(String fileName) throws IOException{
+        PrintWriter pw = new PrintWriter(fileName);
+        for(String str : map.keySet()){
+            pw.write(str+":"+map.get(str)+"\n");
+        }
+        pw.close();
     }
 
 }
